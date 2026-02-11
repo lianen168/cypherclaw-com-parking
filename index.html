@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CypherClaw.com - Domain For Sale</title>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #e0e0e0;
+            --accent-color: #00f3ff; /* 赛博青 */
+            --secondary-color: #ff0055; /* 故障红 */
+            --border-color: #333;
+            --font-mono: 'Courier New', Courier, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-mono);
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* 背景网格效果 */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* 容器 */
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        /* 动态标题效果 */
+        h1.glitch-title {
+            /* 确保手机端完整显示：使用 viewport width 单位 */
+            font-size: clamp(2rem, 11vw, 6rem); 
+            font-weight: 900;
+            text-transform: uppercase;
+            position: relative;
+            color: var(--text-color);
+            margin-bottom: 10px;
+            letter-spacing: -0.05em;
+            text-shadow: 2px 2px 0px var(--secondary-color);
+            animation: text-flicker 3s infinite alternate;
+        }
+
+        /* 故障效果伪元素 */
+        h1.glitch-title::before,
+        h1.glitch-title::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-color);
+        }
+
+        h1.glitch-title::before {
+            left: 2px;
+            text-shadow: -1px 0 var(--secondary-color);
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+
+        h1.glitch-title::after {
+            left: -2px;
+            text-shadow: -1px 0 var(--accent-color);
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--accent-color);
+            margin-bottom: 40px;
+            opacity: 0.8;
+            letter-spacing: 2px;
+        }
+
+        /* 核心理念/蜕变 */
+        .manifesto {
+            margin-bottom: 50px;
+            padding: 20px;
+            border-left: 2px solid var(--accent-color);
+            background: rgba(0, 243, 255, 0.05);
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        /* 9宫格布局 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .feature-card h3 {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .feature-card p {
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        /* 价格区域 */
+        .pricing-section {
+            margin: 40px 0;
+            padding: 30px;
+            border: 1px dashed var(--border-color);
+            position: relative;
+        }
+
+        .price-tag {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .installment-info {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            margin-bottom: 25px;
+        }
+
+        /* 购买按钮 */
+        .buy-btn {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-family: var(--font-mono);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .buy-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-color);
+            z-index: -1;
+            transition: all 0.3s;
+        }
+
+        .buy-btn:hover {
+            color: #000;
+            box-shadow: 0 0 20px var(--accent-color);
+        }
+
+        .buy-btn:hover::before {
+            left: 0;
+        }
+
+        /* 底部联系方式 */
+        .footer {
+            margin-top: auto;
+            padding: 40px 0;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            width: 100%;
+            text-align: center;
+        }
+
+        .copy-btn {
+            background: none;
+            border: 1px solid #555;
+            color: #888;
+            padding: 8px 15px;
+            cursor: pointer;
+            margin-left: 10px;
+            font-family: var(--font-mono);
+            transition: 0.2s;
+        }
+
+        .copy-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* 动画关键帧 */
+        @keyframes text-flicker {
+            0% { opacity: 0.9; }
+            5% { opacity: 1; }
+            10% { opacity: 0.8; }
+            15% { opacity: 1; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(34px, 9999px, 11px, 0); }
+            20% { clip: rect(68px, 9999px, 89px, 0); }
+            40% { clip: rect(12px, 9999px, 56px, 0); }
+            60% { clip: rect(45px, 9999px, 23px, 0); }
+            80% { clip: rect(89px, 9999px, 4px, 0); }
+            100% { clip: rect(2px, 9999px, 76px, 0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(12px, 9999px, 56px, 0); }
+            20% { clip: rect(89px, 9999px, 4px, 0); }
+            40% { clip: rect(34px, 9999px, 11px, 0); }
+            60% { clip: rect(2px, 9999px, 76px, 0); }
+            80% { clip: rect(45px, 9999px, 23px, 0); }
+            100% { clip: rect(68px, 9999px, 89px, 0); }
+        }
+
+        /* 移动端适配调整 */
+        @media (max-width: 600px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .manifesto {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grid-bg"></div>
+
+    <div class="container">
+        <!-- 动态大字体，确保手机可视 -->
+        <h1 class="glitch-title" data-text="CYPHERCLAW">CYPHERCLAW</h1>
+        <div class="subtitle">.COM</div>
+
+        <!-- 核心思想 -->
+        <div class="manifesto">
+            <p>> 正在初始化协议...<br>
+            > 警告：旧网络正在蜕变 (Molting)。<br>
+            > <strong>CypherClaw</strong> 是你在加密时代的数字利爪。它不仅是代理(Agent)，更是主权。</p>
+        </div>
+
+        <!-- 9个相关领域 -->
+        <div class="features-grid">
+            <!-- 核心要求 1 -->
+            <div class="feature-card">
+                <h3>01. Privacy-Enhanced AI</h3>
+                <p>隐私增强型 AI 代理。本地运行，数据不离身，真正的数字分身。</p>
+            </div>
+            <!-- 核心要求 2 -->
+            <div class="feature-card">
+                <h3>02. Crypto Trading Bots</h3>
+                <p>加密货币高频交易机器人。像利爪一样精准捕获链上套利机会。</p>
+            </div>
+            <!-- 核心要求 3 -->
+            <div class="feature-card">
+                <h3>03. Network Security</h3>
+                <p>自动化渗透测试工具集。在威胁触达核心前将其撕碎。</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>04. Zero-Knowledge Proofs</h3>
+                <p>零知识证明身份验证。在不泄露隐私的前提下证明"你是你"。</p>
+            </div>
+            <div class="feature-card">
+                <h3>05. Dark Web Sentinel</h3>
+                <p>暗网监控哨兵。24/7 巡逻，保护企业资产与情报安全。</p>
+            </div>
+            <div class="feature-card">
+                <h3>06. Decentralized Storage</h3>
+                <p>去中心化数据抓取与存储。不可篡改的真理记录仪。</p>
+            </div>
+            <div class="feature-card">
+                <h3>07. Smart Contract Audit</h3>
+                <p>智能合约自动化审计 Claw。发现代码中的隐形漏洞。</p>
+            </div>
+            <div class="feature-card">
+                <h3>08. Digital Sovereignty</h3>
+                <p>数字主权管理平台。从 Web2 的牢笼中蜕变，掌控私钥。</p>
+            </div>
+            <div class="feature-card">
+                <h3>09. The Molt Protocol</h3>
+                <p>下一代进化协议。连接 Cypherpunk 精神与 AI 奇点的桥梁。</p>
+            </div>
+        </div>
+
+        <!-- 销售区域 -->
+        <div class="pricing-section">
+            <div class="price-tag">$3,780 USD</div>
+            <div class="installment-info">
+                [ 9 Monthly Installments Available / 分9期付款 ]
+            </div>
+            <a href="https://www.spaceship.com/s/buy/cypherclaw.com/xT3gWrbtnPiCWqTF" target="_blank" class="buy-btn">
+                INITIATE ACQUISITION
+            </a>
+            <p style="margin-top: 15px; font-size: 0.7rem; color: #666;">Secured via Spaceship.com</p>
+        </div>
+    </div>
+
+    <!-- 底部联系 -->
+    <footer class="footer">
+        <p>
+            Owner Contact: 
+            <span id="email-text" style="color: #fff;">joshua369x@gmail.com</span>
+            <button class="copy-btn" onclick="copyEmail()">[COPY]</button>
+        </p>
+    </footer>
+
+    <script>
+        function copyEmail() {
+            const email = "joshua369x@gmail.com";
+            const btn = document.querySelector('.copy-btn');
+            
+            navigator.clipboard.writeText(email).then(() => {
+                btn.innerText = "已复制";
+                btn.style.borderColor = "#00f3ff";
+                btn.style.color = "#00f3ff";
+                
+                setTimeout(() => {
+                    btn.innerText = "[COPY]";
+                    btn.style.borderColor = "#555";
+                    btn.style.color = "#888";
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
