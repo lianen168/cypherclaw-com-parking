@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +8,8 @@
         :root {
             --bg-color: #050505;
             --text-color: #e0e0e0;
-            --cypher-color: #00f3ff; /* 赛博青 - 逻辑 */
-            --claw-color: #ff0055;   /* 故障红 - 力量 */
+            --cypher-color: #00f3ff; /* Cyan - Logic/Code */
+            --claw-color: #ff2a6d;   /* Neon Red - Grip/Force */
             --border-color: #333;
             --font-mono: 'Courier New', Courier, monospace;
             --font-display: 'Arial Black', 'Impact', sans-serif;
@@ -33,7 +33,7 @@
             min-height: 100vh;
         }
 
-        /* 动态背景 */
+        /* Dynamic Grid Background */
         .grid-bg {
             position: fixed;
             top: 0;
@@ -57,214 +57,223 @@
             align-items: center;
         }
 
-        /* === 标题区域设计 === */
+        /* === Header Design === */
         .brand-header {
             display: flex;
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             width: 100%;
         }
 
-        /* 赛博龙虾图标 */
-        .cyber-lobster-svg {
-            width: clamp(50px, 12vw, 100px);
+        /* Mechanical Claw Icon (SVG) */
+        .mech-claw-svg {
+            width: clamp(60px, 14vw, 110px);
             height: auto;
-            margin-right: 15px;
-            filter: drop-shadow(0 0 5px var(--cypher-color));
-            animation: pulse-glow 3s infinite alternate;
+            margin-right: 20px;
+            filter: drop-shadow(0 0 8px var(--cypher-color));
+            animation: clamp-breathing 4s infinite ease-in-out;
         }
 
-        .lobster-path {
+        .svg-structure {
             fill: none;
             stroke: var(--cypher-color);
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-        
-        .lobster-eyes {
-            fill: var(--claw-color);
-            stroke: none;
+            stroke-width: 3;
+            stroke-linecap: square;
         }
 
-        /* 标题文字容器 */
+        .svg-pincer {
+            fill: var(--claw-color);
+            opacity: 0.8;
+        }
+
+        /* Title Typography */
         h1.main-title {
-            /* 响应式字体大小：在手机上自动缩小，在电脑上变大 */
-            font-size: clamp(2.2rem, 10vw, 6rem);
+            font-size: clamp(2.5rem, 11vw, 6.5rem);
             line-height: 1;
             text-transform: uppercase;
             display: flex;
-            flex-wrap: wrap; /* 允许极小屏幕折行 */
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 5px;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* 左半部分 CYPHER 效果 */
+        /* CYPHER - Hollow, Code-like */
         .text-cypher {
             font-family: var(--font-mono);
-            color: var(--bg-color);
+            color: transparent;
             -webkit-text-stroke: 2px var(--cypher-color);
-            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
-            letter-spacing: -2px;
-            position: relative;
+            text-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+            letter-spacing: -3px;
         }
         
-        /* 右半部分 CLAW 效果 */
+        /* CLAW - Heavy, Industrial, Gripping */
         .text-claw {
             font-family: var(--font-display);
-            color: var(--claw-color);
-            font-style: italic;
-            text-shadow: 4px 4px 0px #000, 
-                         6px 6px 0px var(--cypher-color);
+            background: var(--claw-color);
+            color: #000;
+            padding: 0 10px;
             transform: skew(-10deg);
+            box-shadow: 5px 5px 0px #fff;
             display: inline-block;
         }
 
         .subtitle {
-            font-size: 1rem;
-            color: #666;
+            font-size: 0.9rem;
+            color: #777;
             margin-bottom: 50px;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             text-transform: uppercase;
         }
 
-        /* === 宣言区域 === */
+        /* === Manifesto Section === */
         .manifesto {
             width: 100%;
             margin-bottom: 50px;
-            padding: 20px;
-            border: 1px solid var(--border-color);
-            background: rgba(0, 0, 0, 0.6);
+            padding: 25px;
+            border-left: 4px solid var(--claw-color);
+            background: linear-gradient(90deg, rgba(255, 42, 109, 0.05) 0%, rgba(0,0,0,0) 100%);
             text-align: left;
-            font-size: 0.9rem;
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.05);
+            font-size: 1rem;
             position: relative;
         }
         
-        .manifesto::before {
-            content: "SYSTEM_MSG >";
+        .manifesto strong {
             color: var(--cypher-color);
-            font-weight: bold;
-            display: block;
-            margin-bottom: 10px;
         }
 
-        /* === 9宫格 === */
+        /* === 9-Grid Layout === */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
+            gap: 20px;
             width: 100%;
             margin-bottom: 60px;
         }
 
         .feature-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.5) 100%);
-            border-left: 3px solid #333;
-            padding: 20px;
-            transition: all 0.3s ease;
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid #333;
+            padding: 25px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
         }
 
+        /* Hover effect looking like a clamp closing */
+        .feature-card::before, .feature-card::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border: 2px solid var(--cypher-color);
+            transition: 0.3s;
+            opacity: 0;
+        }
+        
+        .feature-card::before { top: 5px; left: 5px; border-right: 0; border-bottom: 0; }
+        .feature-card::after { bottom: 5px; right: 5px; border-left: 0; border-top: 0; }
+
         .feature-card:hover {
-            border-left-color: var(--claw-color);
-            transform: translateX(5px);
-            background: linear-gradient(135deg, rgba(255,0,85,0.05) 0%, rgba(0,0,0,0.5) 100%);
+            border-color: var(--cypher-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .feature-card:hover::before, .feature-card:hover::after {
+            opacity: 1;
         }
 
         .feature-card h3 {
-            color: var(--cypher-color);
-            font-size: 1rem;
-            margin-bottom: 8px;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
             text-transform: uppercase;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
         }
 
         .feature-card p {
-            font-size: 0.8rem;
-            color: #999;
+            font-size: 0.85rem;
+            color: #888;
         }
 
-        /* === 价格与购买 === */
+        /* === Pricing Section === */
         .pricing-section {
             width: 100%;
             margin: 40px 0;
-            padding: 40px;
-            border: 2px solid var(--border-color);
+            padding: 50px 20px;
+            border: 2px dashed #444;
             position: relative;
-            background: repeating-linear-gradient(
-                45deg,
-                rgba(0,0,0,0.5),
-                rgba(0,0,0,0.5) 10px,
-                rgba(20,20,20,0.5) 10px,
-                rgba(20,20,20,0.5) 20px
-            );
-        }
-
-        .price-display {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
+            background: radial-gradient(circle at center, rgba(30,30,30,0.5) 0%, rgba(0,0,0,1) 100%);
         }
 
         .price-tag {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 900;
             color: #fff;
-            text-shadow: 0 0 20px var(--cypher-color);
+            margin-bottom: 5px;
+            letter-spacing: -2px;
         }
 
-        .installment-badge {
-            background: var(--claw-color);
-            color: #000;
-            font-weight: bold;
-            padding: 5px 15px;
-            font-size: 0.8rem;
-            transform: skew(-15deg);
-            margin-top: 10px;
+        .installment-info {
+            color: var(--cypher-color);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
         }
 
         .buy-btn {
+            position: relative;
             display: inline-block;
-            background-color: var(--cypher-color);
-            color: #000;
-            padding: 20px 50px;
-            font-size: 1.5rem;
+            background-color: var(--claw-color);
+            color: #fff;
+            padding: 20px 60px;
+            font-size: 1.4rem;
             font-family: var(--font-display);
             text-decoration: none;
             text-transform: uppercase;
-            font-weight: bold;
-            cursor: pointer;
+            letter-spacing: 1px;
+            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
             transition: all 0.2s;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-            box-shadow: 5px 5px 0px var(--claw-color);
         }
 
         .buy-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 7px 7px 0px var(--claw-color);
-            filter: brightness(1.2);
+            background-color: #fff;
+            color: #000;
+            box-shadow: 0 0 25px var(--claw-color);
         }
 
-        /* === 底部 === */
+        /* === Footer === */
         .footer {
             margin-top: auto;
-            padding: 30px 0;
+            padding: 40px 0;
             border-top: 1px solid #222;
             width: 100%;
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        .email-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
         }
 
         .copy-btn {
             background: transparent;
             border: 1px solid #444;
-            color: #666;
-            padding: 5px 10px;
+            color: #888;
+            padding: 5px 12px;
             cursor: pointer;
-            margin-left: 8px;
             font-family: var(--font-mono);
+            font-size: 0.7rem;
+            transition: 0.2s;
         }
 
         .copy-btn:hover {
@@ -272,27 +281,28 @@
             color: var(--cypher-color);
         }
 
-        /* === 动画 === */
-        @keyframes pulse-glow {
-            0% { filter: drop-shadow(0 0 2px var(--cypher-color)); }
-            100% { filter: drop-shadow(0 0 10px var(--cypher-color)); }
+        /* === Animations === */
+        @keyframes clamp-breathing {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
-        /* 移动端适配 */
+        /* Mobile Adjustments */
         @media (max-width: 600px) {
             .brand-header {
                 flex-direction: column;
             }
-            .cyber-lobster-svg {
-                width: 60px;
+            .mech-claw-svg {
+                width: 80px;
                 margin-right: 0;
-                margin-bottom: 10px;
+                margin-bottom: 15px;
             }
             .pricing-section {
-                padding: 20px;
+                padding: 30px 15px;
             }
             .price-tag {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
         }
     </style>
@@ -303,23 +313,24 @@
 
     <div class="container">
         
-        <!-- 品牌头部：龙虾图标 + 分裂字体 -->
+        <!-- Brand Header: Mechanical Claw Icon + Split Text -->
         <div class="brand-header">
-            <!-- SVG 绘制的赛博龙虾/机械爪 -->
-            <svg class="cyber-lobster-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <!-- 身体/甲壳 -->
-                <path class="lobster-path" d="M50 80 L40 60 L40 40 Q50 30 60 40 L60 60 L50 80 Z" />
-                <!-- 左钳子 -->
-                <path class="lobster-path" d="M40 45 L30 35 L20 40 L15 30 L25 20 L40 30" />
-                <!-- 右钳子 -->
-                <path class="lobster-path" d="M60 45 L70 35 L80 40 L85 30 L75 20 L60 30" />
-                <!-- 触须 -->
-                <path class="lobster-path" d="M50 30 L45 10 M50 30 L55 10" />
-                <!-- 眼睛 (发光红点) -->
-                <circle class="lobster-eyes" cx="45" cy="35" r="2" />
-                <circle class="lobster-eyes" cx="55" cy="35" r="2" />
-                <!-- 尾部 -->
-                <path class="lobster-path" d="M45 80 L55 80 L50 90 Z" />
+            <!-- Custom SVG: Abstract Mechanical Claw / Pincer -->
+            <svg class="mech-claw-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer Pincers (The "Clamp") -->
+                <path class="svg-structure" d="M30 20 C 10 30, 10 70, 30 80" />
+                <path class="svg-structure" d="M70 20 C 90 30, 90 70, 70 80" />
+                
+                <!-- Inner Grippers (Solid) -->
+                <path class="svg-pincer" d="M30 35 L45 50 L30 65 Z" />
+                <path class="svg-pincer" d="M70 35 L55 50 L70 65 Z" />
+                
+                <!-- Central Connection -->
+                <line x1="45" y1="50" x2="55" y2="50" stroke="#00f3ff" stroke-width="2" />
+                <circle cx="50" cy="50" r="3" fill="#00f3ff" />
+                
+                <!-- Hydraulic Lines -->
+                <path class="svg-structure" d="M30 80 L50 95 L70 80" fill="none" opacity="0.5"/>
             </svg>
 
             <h1 class="main-title">
@@ -328,78 +339,79 @@
             </h1>
         </div>
 
-        <div class="subtitle">>>> DECENTRALIZED INTELLIGENCE <<<</div>
+        <div class="subtitle">>>> DECENTRALIZED PROTOCOL INITIATED <<<</div>
 
-        <!-- 核心思想 -->
+        <!-- Manifesto / Core Concept -->
         <div class="manifesto">
-            <p>警告：检测到旧协议正在剥落 (Molting Process Initiated)。<br>
-            <strong>CypherClaw</strong> 是你在加密荒原中的生存工具。它不仅是代码，它是你的数字外骨骼。</p>
+            <p><strong>SYSTEM NOTIFICATION:</strong> The old web is molting.<br>
+            To survive the transition, you need traction. <strong>CypherClaw</strong> is your digital manipulator. It anchors your sovereignty, clamps onto value, and secures your position in the cryptographic stream.</p>
         </div>
 
-        <!-- 9个相关领域 -->
+        <!-- 9 Core Domains (Grid) -->
         <div class="features-grid">
             <div class="feature-card">
                 <h3>01. Privacy AI Agents</h3>
-                <p>本地运行的私密 AI 代理，数据绝对主权。</p>
+                <p>Local intelligence extraction. Data never leaves your perimeter.</p>
             </div>
             <div class="feature-card">
                 <h3>02. Crypto Trading Bots</h3>
-                <p>全自动加密货币套利机器人，如利爪般精准。</p>
+                <p>High-frequency arbitrage grippers. Capture value instantly.</p>
             </div>
             <div class="feature-card">
                 <h3>03. Network Security</h3>
-                <p>自动化渗透测试与防御护盾。</p>
+                <p>Automated defensive clamps. Lock down your digital borders.</p>
             </div>
             <div class="feature-card">
-                <h3>04. Zero-Knowledge ID</h3>
-                <p>ZK-Proof 身份验证，匿名通行证。</p>
+                <h3>04. Zero-Knowledge Proofs</h3>
+                <p>Cryptographic anchors. Verify identity without exposure.</p>
             </div>
             <div class="feature-card">
-                <h3>05. Dark Web Monitor</h3>
-                <p>深网数据泄露实时嗅探与预警。</p>
+                <h3>05. Dark Web Sentinel</h3>
+                <p>Threat extraction tools. Scan the depths, retrieve intel.</p>
             </div>
             <div class="feature-card">
                 <h3>06. Decentralized Storage</h3>
-                <p>IPFS/Arweave 永久数据抓取与存档。</p>
+                <p>Permanent data holding. Immutable record keeping.</p>
             </div>
             <div class="feature-card">
                 <h3>07. Smart Contract Audit</h3>
-                <p>AI 驱动的智能合约漏洞扫描器。</p>
+                <p>Code analysis pincers. Expose vulnerabilities before deployment.</p>
             </div>
             <div class="feature-card">
                 <h3>08. Digital Sovereignty</h3>
-                <p>私钥管理与数字资产托管协议。</p>
+                <p>Key management systems. Secure your absolute ownership.</p>
             </div>
             <div class="feature-card">
-                <h3>09. Molt Protocol</h3>
-                <p>从 Web2 向 Web3 进化的最终接口。</p>
+                <h3>09. The Molt Protocol</h3>
+                <p>Evolutionary toolset. Shed the Web2 shell.</p>
             </div>
         </div>
 
-        <!-- 销售区域 -->
+        <!-- Pricing & Buy Section -->
         <div class="pricing-section">
-            <div class="price-display">
-                <div class="price-tag">$3,780 USD</div>
-                <div class="installment-badge">9 MONTHLY PAYMENTS AVAILABLE</div>
+            <div class="price-tag">$3,780 USD</div>
+            <div class="installment-info">
+                [ 9 Monthly Installments Available ]
             </div>
             
+            <!-- Link to Spaceship -->
             <a href="https://www.spaceship.com/s/buy/cypherclaw.com/xT3gWrbtnPiCWqTF" target="_blank" class="buy-btn">
-                ACQUIRE DOMAIN
+                SECURE DOMAIN NOW
             </a>
             
-            <p style="margin-top: 15px; font-size: 0.75rem; color: #555;">
-                Escrow secured via Spaceship.com
+            <p style="margin-top: 20px; font-size: 0.7rem; color: #666;">
+                Transaction secured via Spaceship.com Escrow
             </p>
         </div>
     </div>
 
-    <!-- 底部联系 -->
+    <!-- Footer / Contact -->
     <footer class="footer">
-        <p>
-            OWNER CONTACT: 
-            <span style="color: #fff; border-bottom: 1px dotted #555;">joshua369x@gmail.com</span>
+        <div>DOMAIN OWNER CONTACT</div>
+        <div class="email-container">
+            <span style="color: #fff; letter-spacing: 1px;">joshua369x@gmail.com</span>
             <button class="copy-btn" onclick="copyEmail()">[COPY]</button>
-        </p>
+        </div>
     </footer>
 
     <script>
@@ -408,14 +420,15 @@
             const btn = document.querySelector('.copy-btn');
             
             navigator.clipboard.writeText(email).then(() => {
-                btn.innerText = "已复制";
+                // Change text to Chinese "已复制" as requested in previous turn (or English if preferred, but user didn't specify changing this interaction language explicitly, I will stick to English for consistency)
+                btn.innerText = "COPIED"; 
                 btn.style.borderColor = "#00f3ff";
                 btn.style.color = "#00f3ff";
                 
                 setTimeout(() => {
                     btn.innerText = "[COPY]";
                     btn.style.borderColor = "#444";
-                    btn.style.color = "#666";
+                    btn.style.color = "#888";
                 }, 2000);
             }).catch(err => {
                 console.error('Failed to copy: ', err);
